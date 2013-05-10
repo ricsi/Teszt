@@ -1,0 +1,84 @@
+{% extends '::admin/layout_admin.html.twig' %}
+{% block title %}{{entity.name}} Adatlapja{% endblock%}
+{% block prev %} <a href="{{path("admin_product")}}">Termékek listája</a> {% endblock %}
+
+{% block body -%}
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th>Azonosító</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>Név</th>
+            <td>{{ entity.name }}</td>
+        </tr>
+        <tr>
+            <th>Keresőbarát név</th>
+            <td>{{ entity.nameSlug }}</td>
+        </tr>
+        <tr>
+            <th>Ára</th>
+            <td>{{ entity.prize }}</td>
+        </tr>
+        <tr>
+            <th>Anyag</th>
+            <td>{{ entity.anyag }}</td>
+        </tr>
+        <tr>
+            <th>Méret</th>
+            <td>{{ entity.size }}</td>
+        </tr>
+        <tr>
+            <th>Leírás</th>
+            <td>{{ entity.descreption }}</td>
+        </tr>
+        <tr>
+            <th>Kép</th>
+            <td><img src="/uploads/product/thb_{{ entity.image }}" style="width: 100px"></td>
+        </tr>
+        {% if entity.image2 %}
+        <tr>
+            <th>Kép2</th>
+            <td><img src="/uploads/product/thb_{{ entity.image2 }}" style="width: 100px"></td>
+        </tr>
+        {% endif %}
+        {% if entity.image3 %}
+        <tr>
+            <th>Kép3</th>
+            <td><img src="/uploads/product/thb_{{ entity.image3 }}" style="width: 100px"></td>
+        </tr>
+        {% endif %}
+        {% if entity.image4 %}
+        <tr>
+            <th>Kép4</th>
+            <td><img src="/uploads/product/thb_{{ entity.image4 }}" style="width: 100px"></td>
+        </tr>
+        {% endif %}
+        <tr>
+            <th>Kategória</th>
+            <td>{{ entity.category }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('admin_product') }}">
+            Vissza a listához
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('admin_product_edit', { 'id': entity.id }) }}">
+            Szerkeztés
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('admin_product_delete', { 'id': entity.id }) }}" method="post">
+            <input type="hidden" name="_method" value="DELETE" />
+            {{ form_widget(delete_form) }}
+            <button type="submit">Törlés</button>
+        </form>
+    </li>
+</ul>
+{% endblock %}

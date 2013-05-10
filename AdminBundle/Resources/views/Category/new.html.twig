@@ -1,0 +1,34 @@
+{% extends '::admin/layout_admin.html.twig' %}
+{% block prev %} <a href="{{path("admin_category")}}">Kategóriák listája</a> {% endblock %}
+{% block title %}Új létrehozása{% endblock%}
+
+{% block body -%}
+
+<form novalidate action="{{ path('admin_category_create') }}" method="post" {{ form_enctype(form) }}>
+    <label>Kategória neve</label>                    
+        {{ form_widget(form.name) }}
+        {{ form_errors(form.name) }}
+    <p class="info">Az adott kategória neve!</p>
+
+    <label>Kategória</label>                    
+        {{ form_widget(form.parent) }}
+        {{ form_errors(form.parent) }}
+    <p class="info">A kategória főkategória ["gyökér elem"], vagy mellék kategória?!</p>
+
+    <div style="display: none">{{ form_widget(form.root) }}{{ form_errors(form.root) }}</div>
+
+
+ {{ form_widget(form) }}
+        <p>
+            <button type="submit">Létrehozás</button>
+        </p>
+    </form>
+
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('admin_category') }}">
+                Vissza a listához
+            </a>
+        </li>
+    </ul>
+{% endblock %}

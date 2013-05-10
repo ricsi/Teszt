@@ -1,0 +1,52 @@
+{% extends '::admin/layout_admin.html.twig' %}
+{% block prev %} <a href="{{path("admin_menu")}}">Menüpontok listája</a> {% endblock %}
+{% block title %}{{entity.title}} Szerkeztése{% endblock%}
+
+{% block body -%}
+
+<form novalidate="novalidate"action="{{ path('admin_menu_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+      <input type="hidden" name="_method" value="PUT" />
+    <label>Menüpont neve</label>                    
+    {{ form_widget(edit_form.title) }}
+    {{ form_errors(edit_form.title) }}
+    <p class="info">Az adott menüpont neve!</p>
+    <label>Menüpont Kulcsszavak</label>                    
+    {{ form_widget(edit_form.seoKeywords) }}
+    {{ form_errors(edit_form.seoKeywords) }}
+    <p class="info">Az keresőoptimalizált kulcsszavak 12-14 darab maximum!</p>
+    <label>Menüpont Leírása</label>                    
+    {{ form_widget(edit_form.seoTitle) }}
+    {{ form_errors(edit_form.seoTitle) }}
+    <p class="info">Az keresőoptimalizált leírása (a google-ben pl ez fog megjeleni)!</p>
+    <label>Menüpont Tartalma</label>                    
+    {{ form_widget(edit_form.content) }}
+    {{ form_errors(edit_form.content) }}
+    <p class="info">Az menüpont tartalma!</p>
+    <label>Kategória</label>                    
+    {{ form_widget(edit_form.parent) }}
+    {{ form_errors(edit_form.parent) }}
+    <p class="info">Főmenü-Almenü kapcsolat!</p>
+
+    
+    <div style="display: none"> {{ form_widget(edit_form.root) }}</div>
+    {{ form_widget(edit_form) }}
+    <p>
+        <button type="submit">Szerkeztés</button>
+    </p>
+</form>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('admin_menu') }}">
+            Vissza a listához
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('admin_menu_delete', { 'id': entity.id }) }}" method="post">
+            <input type="hidden" name="_method" value="DELETE" />
+            {{ form_widget(delete_form) }}
+            <button type="submit">Törlés</button>
+        </form>
+    </li>
+</ul>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends '::admin/layout_admin.html.twig' %}
+{% block prev %} <a href="{{path("admin_menu")}}">Menüpontok listája</a> {% endblock %}
+{% block title %}Új létrehozása{% endblock%}
+
+
+{% block body -%}
+<form novalidate="novalidate" action="{{ path('admin_menu_create') }}" method="post" {{ form_enctype(form) }}>
+         <label>Menüpont neve</label>                    
+    {{ form_widget(form.title) }}
+    {{ form_errors(form.title) }}
+    <p class="info">Az adott menüpont neve!</p>
+    <label>Menüpont Kulcsszavak</label>                    
+    {{ form_widget(form.seoKeywords) }}
+    {{ form_errors(form.seoKeywords) }}
+    <p class="info">Az keresőoptimalizált kulcsszavak 12-14 darab maximum!</p>
+    <label>Menüpont Leírása</label>                    
+    {{ form_widget(form.seoTitle) }}
+    {{ form_errors(form.seoTitle) }}
+    <p class="info">Az keresőoptimalizált leírása (a google-ben pl ez fog megjeleni)!</p>
+    <label>Menüpont Tartalma</label>                    
+    {{ form_widget(form.content) }}
+    {{ form_errors(form.content) }}
+    <p class="info">Az menüpont tartalma!</p>
+    <label>Kategória</label>                    
+    {{ form_widget(form.parent) }}
+    {{ form_errors(form.parent) }}
+    <p class="info">Főmenü-Almenü kapcsolat!</p>
+
+    
+    <div style="display: none"> {{ form_widget(form.root) }}</div> {{ form_widget(form) }}
+      <p>
+        <button type="submit">Létrehozás</button>
+    </p>
+</form>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('admin_menu') }}">
+            Vissza a listához
+        </a>
+    </li>
+</ul>
+{% endblock %}

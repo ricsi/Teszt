@@ -1,0 +1,54 @@
+{% extends '::admin/layout_admin.html.twig' %}
+{% block title %}{{entity.title}} Adatlapja{% endblock%}
+{% block prev %} <a href="{{path("admin_menu")}}">Menüpontok listája</a> {% endblock %}
+
+{% block body -%}
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Azonosító</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Címe</th>
+                <td>{{ entity.title }}</td>
+            </tr>
+            <tr>
+                <th>Böngészőben a címe</th>
+                <td>{{ entity.titleSlug }}</td>
+            </tr>
+            <tr>
+                <th>Leírás</th>
+                <td>{{ entity.content|raw }}</td>
+            </tr>
+            <tr>
+                <th>Keresőoptimalizált kulcsszavak</th>
+                <td>{{ entity.seoKeywords }}</td>
+            </tr>
+            <tr>
+                <th>Keresőoptimalizált leírás</th>
+                <td>{{ entity.seoTitle }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('admin_menu') }}">
+            Vissza a listához
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('admin_menu_edit', { 'id': entity.id }) }}">
+            Szerkeztés
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('admin_menu_delete', { 'id': entity.id }) }}" method="post">
+            <input type="hidden" name="_method" value="DELETE" />
+            {{ form_widget(delete_form) }}
+            <button type="submit">Törlés</button>
+        </form>
+    </li>
+</ul>
+{% endblock %}

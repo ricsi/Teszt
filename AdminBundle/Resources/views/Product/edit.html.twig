@@ -1,0 +1,81 @@
+{% extends '::admin/layout_admin.html.twig' %}
+{% block prev %} <a href="{{path("admin_product")}}">Termékek listája</a> {% endblock %}
+{% block title %}{{entity.name}} Szerkeztése{% endblock%}
+
+
+{% block body -%}
+<form novalidate="novalidate" action="{{ path('admin_product_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+      <input type="hidden" name="_method" value="PUT" />
+    <label>Termék neve</label>                    
+    {{ form_widget(edit_form.name) }}
+    {{ form_errors(edit_form.name) }}
+    <p class="info">Az adott termék neve!</p>
+
+    <label>Termék Ára</label>                    
+    {{ form_widget(edit_form.prize) }}
+    {{ form_errors(edit_form.prize) }}
+    <p class="info">Az adott termék méterára!</p>
+
+    <label>Termék Anyaga</label>                    
+    {{ form_widget(edit_form.anyag) }}
+    {{ form_errors(edit_form.anyag) }}
+    <p class="info">Az adott termék anyaga!</p>
+
+    <label>Termék Mérete</label>                    
+    {{ form_widget(edit_form.size) }}
+    {{ form_errors(edit_form.size) }}
+    <p class="info">Az adott termék mérete!</p>
+
+
+    <label>Termék Leírása</label>                    
+    {{ form_widget(edit_form.descreption) }}
+    {{ form_errors(edit_form.descreption) }}
+    <p class="info">Az adott termék leírása!</p>
+
+
+
+    <label>Termék Kategória</label>                    
+    {{ form_widget(edit_form.category) }}
+    {{ form_errors(edit_form.category) }}
+    <p class="info">Az adott termék besorolása kategóriaba!</p>
+
+
+    <label>Termék Főképe</label>                    
+    {{ form_widget(edit_form.file) }}
+    {{ form_errors(edit_form.file) }}
+    <p class="info">Az adott termék borítóképe!</p>
+
+    <label>Termék Alképe1</label>                    
+    {{ form_widget(edit_form.file2) }}
+    {{ form_errors(edit_form.file2) }}
+    <p class="info">Az adott termék alképe!</p>
+    <label>Termék Alképe2</label>                    
+    {{ form_widget(edit_form.file3) }}
+    {{ form_errors(edit_form.file3) }}
+    <p class="info">Az adott termék alképe!</p>
+    <label>Termék Alképe3</label>                    
+    {{ form_widget(edit_form.file4) }}
+    {{ form_errors(edit_form.file4) }}
+    <p class="info">Az adott termék alképe!</p>
+
+    {{ form_widget(edit_form) }}
+    <p>
+        <button type="submit">Szerkeztés</button>
+    </p>
+</form>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('admin_product') }}">
+            Vissza a listához
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('admin_product_delete', { 'id': entity.id }) }}" method="post">
+            <input type="hidden" name="_method" value="DELETE" />
+            {{ form_widget(delete_form) }}
+            <button type="submit">Törlés</button>
+        </form>
+    </li>
+</ul>
+{% endblock %}

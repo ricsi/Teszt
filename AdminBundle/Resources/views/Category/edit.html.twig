@@ -1,0 +1,41 @@
+{% extends '::admin/layout_admin.html.twig' %}
+{% block prev %} <a href="{{path("admin_category")}}">Kategóriák listája</a> {% endblock %}
+{% block title %}{{entity.name}} Szerkeztése{% endblock%}
+
+{% block body -%}
+<form action="{{ path('admin_category_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+    <input type="hidden" name="_method" value="PUT" />
+    <label>Kategória neve</label>                    
+        {{ form_widget(edit_form.name) }}
+        {{ form_errors(edit_form.name) }}
+        <p class="info">Az adott kategória neve!</p>
+
+    <label>Kategória</label>                    
+        {{ form_widget(edit_form.parent) }}
+        {{ form_errors(edit_form.parent) }}
+        <p class="info">A kategória főkategória ["gyökér elem"], vagy mellék kategória?!</p>
+
+
+    <div style="display: none">{{ form_widget(edit_form.root) }}{{ form_errors(edit_form.root) }}</div>
+
+        {{ form_widget(edit_form) }}
+    <p>
+        <button type="submit">Szerkeztés</button>
+    </p>
+</form>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('admin_category') }}">
+            Vissza a listához
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('admin_category_delete', { 'id': entity.id }) }}" method="post">
+            <input type="hidden" name="_method" value="DELETE" />
+            {{ form_widget(delete_form) }}
+            <button type="submit">Törlés</button>
+        </form>
+    </li>
+</ul>
+{% endblock %}

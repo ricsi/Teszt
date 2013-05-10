@@ -1,0 +1,58 @@
+{% extends '::admin/layout_admin.html.twig' %}
+{% block title %}Kategóriák{%endblock%}
+{% block body -%}
+<style>
+        .tablesorter td ul li {
+            display: inline-block;
+            }
+            
+         .tablesorter td {
+             padding: 0;
+         }
+        </style>
+<table class="tablesorter">
+    <thead>
+        <tr>
+            <th>Azonosító</th>
+            <th>Név</th>
+            <th>Művelet</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for entity in entities %}
+                 
+             <tr>
+                <td><a href="{{ path('admin_category_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{entity.lvl==1 ? '' : '&nbsp;&nbsp;&nbsp;&nbsp;&raquo;	'}} {{ entity.name }}</td>
+
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('admin_category_show', { 'id': entity.id }) }}">Mutat</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_category_edit', { 'id': entity.id }) }}">Szerkezt</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_category_moveup', { 'id': entity.id }) }}">Mozgatás fel</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_category_movedown', { 'id': entity.id }) }}">Mozgatás le</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+             
+              
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_category_new') }}">
+                Új létrehozása
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

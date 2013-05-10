@@ -1,0 +1,42 @@
+{% extends '::admin/layout_admin.html.twig' %}
+{% block title %}{{entity.name}} Adatlapja{% endblock%}
+{% block prev %} <a href="{{path("admin_category")}}">Kategóriák listája</a> {% endblock %}
+{% block body -%}
+
+<table class="tablesorter">
+    <thead>
+        <tr>
+            <th>Azonosító</th>
+            <th>Kategória neve</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ entity.id }}</td>
+            <td>{{ entity.name }}</td>
+        </tr>
+
+    </tbody>
+</table>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('admin_category') }}">
+            Vissza a listához
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('admin_category_edit', { 'id': entity.id }) }}">
+            Szerkeztés
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('admin_category_delete', { 'id': entity.id }) }}" method="post">
+            <input type="hidden" name="_method" value="DELETE" />
+            {{ form_widget(delete_form) }}
+            <button type="submit">Törlés</button>
+        </form>
+    </li>
+</ul>
+{% endblock %}

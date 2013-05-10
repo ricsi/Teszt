@@ -1,0 +1,35 @@
+{% extends '::admin/layout_admin.html.twig' %}
+{% block title %}Oldal beállítások{% endblock %}
+{% block body -%}
+<form action="{{ path('admin_setting_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+    <input type="hidden" name="_method" value="PUT" />
+    <div>    
+        <label>Oldal kulcsszavai</label>                    
+        {{ form_widget(edit_form.seoKeywords) }}
+        {{ form_errors(edit_form.seoKeywords) }}
+        <p class="info">pl: Függöny, Függyönyök debrecen, Függönyök Debrecenben, 10-12 rész lehet vesszővel elválasztva!</p>
+    </div>
+    <div>    
+        <label>Oldal leírása</label>                    
+        {{ form_widget(edit_form.seoDescreption) }}
+        {{ form_errors(edit_form.seoDescreption) }}
+        <p class="info">pl: Debreceni függönyök... (googleben megjelenő szöveg maximum 120 karakter)</p>
+    </div>
+    <div>    
+        <label>Oldal címe</label>                    
+        {{ form_widget(edit_form.siteTitle) }}
+        {{ form_errors(edit_form.siteTitle) }}
+        <p class="info">pl: FüggönyCentrum (ez jelenik meg a böngézsők címsorában)</p>
+    </div>
+    <div>    
+        <label>Facebook LINK</label>                    
+        {{ form_widget(edit_form.facebookUrl) }}
+        {{ form_errors(edit_form.facebookUrl) }}
+       <p class="info">pl: https://www.facebook.com/pages/Mindenami-Cica/419132834837048 (A direct URL-je a facebook oldaluknak!)</p>
+    </div>
+        {{ form_widget(edit_form) }}
+    <p>
+        <button type="submit">Szerkeztés</button>
+    </p>
+</form>
+{% endblock %}
